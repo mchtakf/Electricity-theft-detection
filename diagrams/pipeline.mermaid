@@ -1,0 +1,73 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#2563eb', 'secondaryColor': '#f59e0b', 'tertiaryColor': '#10b981'}}}%%
+
+graph TD
+    subgraph INPUT["📂 Input Data"]
+        A[Raw Meter Readings<br/>380K+ records, 32 columns]
+    end
+
+    subgraph STAGE1["🧹 Stage 1: Data Cleaning"]
+        B1[Date Parsing<br/>IlkOkuma / SonOkuma]
+        B2[Negative Consumption<br/>3 categories]
+        B3[Filtering<br/>Remove non-analysis records]
+        B1 --> B2 --> B3
+    end
+
+    subgraph STAGE2["📅 Stage 2: Monthly Aggregation"]
+        C1[Seasonal Profile Learning<br/>Per tariff group]
+        C2[Weighted Month Splitting<br/>Multi-month readings]
+        C3[Monthly Dataset<br/>534K records, 15K subscribers]
+        C1 --> C2 --> C3
+    end
+
+    subgraph STAGE3["🔧 Stage 3: Feature Engineering"]
+        D1[Consumption Stats<br/>f01-f12: mean, std, CV, zeros]
+        D2[Trend Analysis<br/>f13-f18: slope, drops, consecutive]
+        D3[Seasonality<br/>f19-f26: winter/summer, cosine sim]
+        D4[Peer Comparison<br/>f27-f32: percentile, group ratio]
+        D5[Technical Signals<br/>f38-f46: reactive, rollback, demand]
+        D1 --- D2 --- D3 --- D4 --- D5
+    end
+
+    subgraph STAGE4["🤖 Stage 4: Model Training"]
+        E1["🌳 Random Forest<br/>weight: 20%"]
+        E2["⚡ XGBoost<br/>weight: 40%"]
+        E3["💡 LightGBM<br/>weight: 40%"]
+        E4["🌲 Isolation Forest<br/>Per tariff group"]
+        E5["📈 Group Time-Series<br/>Seasonal deviation"]
+        E6["📉 Individual Time-Series<br/>Self-baseline comparison"]
+
+        subgraph SUP["Supervised Ensemble"]
+            E1
+            E2
+            E3
+        end
+    end
+
+    subgraph STAGE5["🏆 Stage 5: Mega Ensemble"]
+        F1["Normalize (0-1)"]
+        F2["Weighted Combination<br/>Sup 40% + ISO 20% + GTS 15% + ITS 25%"]
+        F3["Risk Categories<br/>CRITICAL → LOW"]
+        F4["AI Explanations<br/>Per subscriber"]
+        F5["📄 Field Report<br/>Excel, 6 sheets"]
+        F1 --> F2 --> F3 --> F4 --> F5
+    end
+
+    A --> STAGE1
+    STAGE1 --> STAGE2
+    STAGE2 --> STAGE3
+    STAGE3 --> SUP
+    STAGE3 --> E4
+    STAGE3 --> E5
+    STAGE3 --> E6
+    SUP --> F1
+    E4 --> F1
+    E5 --> F1
+    E6 --> F1
+
+    style INPUT fill:#1e293b,color:#f8fafc
+    style STAGE1 fill:#7c2d12,color:#fed7aa
+    style STAGE2 fill:#1e3a5f,color:#bfdbfe
+    style STAGE3 fill:#14532d,color:#bbf7d0
+    style STAGE4 fill:#4c1d95,color:#ddd6fe
+    style STAGE5 fill:#78350f,color:#fef3c7
+    style SUP fill:#5b21b6,color:#ddd6fe
