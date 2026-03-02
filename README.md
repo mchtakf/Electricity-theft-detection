@@ -154,10 +154,9 @@ Required columns: `AboneUN`, `IlkOkumaTarihi`, `SonOkumaTarihi`, `EndeksTipi`, `
 
 ## 👤 Author
 
-**Mücahit** — IT Specialist & Data Scientist
-- Electrical & Electronics Engineering background
-- SAP PM Integration | Mendix Development | ML Engineering
-- [LinkedIn](your-linkedin-url)
+**Mücahit** — IT Specialist
+
+- [LinkedIn](https://www.linkedin.com/in/m%C3%BCcahit-akfidan-665a001ba/)
 
 ## 📄 License
 
