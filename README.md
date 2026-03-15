@@ -143,15 +143,6 @@ Required columns: `AboneUN`, `IlkOkumaTarihi`, `SonOkumaTarihi`, `EndeksTipi`, `
 
 *Values approximated for confidentiality*
 
-## 🔮 Future Work
-
-- [ ] NeuralProphet integration for individual subscriber forecasting
-- [ ] Transformer-level anomaly detection
-- [ ] Real-time scoring pipeline
-- [ ] Feedback loop from field inspection results
-- [ ] Dashboard (Mendix or Streamlit)
-- [ ] Economic impact estimation (TL/kWh loss calculation)
-
 ## 👤 Author
 
 **Mücahit** — IT Specialist
